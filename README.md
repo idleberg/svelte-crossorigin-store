@@ -10,7 +10,7 @@
 
 - synchronizes store across multiple origins
 - supports iFrames
-- tiny (~720 bytes minified, before gzip)
+- tiny (~450 bytes minified+gzipped)
 
 ## Installation
 
