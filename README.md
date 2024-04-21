@@ -24,7 +24,7 @@
 import { createStore } from 'svelte-crossorigin-store';
 
 const store = createStore('Hello, world');
-const unsubscribe = store.subscribe(value => console.log(`State updated:`, value));
+const unsubscribe = store.subscribe(value => console.log('State updated:', value));
 ```
 
 ### API
