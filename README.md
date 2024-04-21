@@ -4,7 +4,7 @@
 
 [![License](https://img.shields.io/github/license/idleberg/svelte-crossorigin-store?color=blue&style=for-the-badge)](https://github.com/idleberg/svelte-crossorigin-store/blob/main/LICENSE)
 [![Version](https://img.shields.io/npm/v/svelte-crossorigin-store?style=for-the-badge)](https://www.npmjs.org/package/svelte-crossorigin-store)
-[![Build](https://img.shields.io/github/actions/workflow/status/idleberg/svelte-crossorigin-store/default.yml?style=for-the-badge)](https://github.com/idleberg/svelte-crossorigin-store/actions)
+[![Build](https://img.shields.io/github/actions/workflow/status/idleberg/svelte-crossorigin-store/test.yml?style=for-the-badge)](https://github.com/idleberg/svelte-crossorigin-store/actions)
 
 **Features**
 
