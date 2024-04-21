@@ -35,7 +35,7 @@
 #### `createStore`
 
 ```ts
-createStore<T>(initialValue: T, {
+createStore<T>(initialValue?: T, {
 	allowedOrigins?: '*' | string[];
 	id?: string;
 	iframeSelector?: string;
