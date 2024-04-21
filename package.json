@@ -1,0 +1,61 @@
+{
+	"name": "svelte-crossorigin-store",
+	"version": "0.0.0",
+	"type": "module",
+	"module": "./dist/makensis.js",
+	"types": "./dist/makensis.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/makensis.js",
+			"require": "./dist/makensis.cjs",
+			"types": "./dist/makensis.d.ts"
+		}
+	},
+	"files": [
+		"dist/",
+		"LICENSE",
+		"README.md"
+	],
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/idleberg/node-makensis.git"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "npm run build -- --watch",
+		"prepare": "husky",
+		"prepublishOnly": "npm run lint && npm run test",
+		"prepack": "npm run build",
+		"start:iframe1": "vite --config .vite-config/iframe.ts --port 3031",
+		"start:iframe2": "vite --config .vite-config/iframe.ts --port 3032",
+		"start:main": "vite --config .vite-config/main.ts --port 3030",
+		"start": "npm-run-all --parallel start:*"
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "^3.0.2",
+		"@tsconfig/svelte": "^5.0.2",
+		"@types/node": "^18",
+		"carbon-components-svelte": "^0.85.0",
+		"carbon-icons-svelte": "^12.6.0",
+		"husky": "^9.0.11",
+		"lint-staged": "^15.2.2",
+		"npm-run-all2": "^6.1.2",
+		"sass": "^1.75.0",
+		"svelte": "^4.2.12",
+		"tslib": "^2.6.2",
+		"tsup": "^8.0.2",
+		"typescript": "^5.2.2",
+		"vite": "^5.2.0",
+		"vite-plugin-mkcert": "^1.17.5"
+	},
+	"peerDependencies": {
+		"svelte": "^4"
+	},
+	"lint-staged": {
+		"*.(ts|json)": "eslint --cache --fix"
+	},
+	"packageManager": "pnpm@9.0.4+sha512.c374b52de3de88c58fd8333df664a737279cdb0e1344ba4054d3b1fffa9a1a3670854f755dca4f16adea3f14be9896a7fcaf167409fe0c1ad60475271dafe81a"
+}
