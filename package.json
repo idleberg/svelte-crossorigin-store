@@ -16,6 +16,12 @@
 		"LICENSE",
 		"README.md"
 	],
+	"keywords": [
+		"svelte",
+		"svelte-store",
+		"crossorigin",
+		"iframe"
+	],
 	"categories": [
 		"stores-and-state"
 	],
