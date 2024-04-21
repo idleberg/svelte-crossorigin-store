@@ -35,12 +35,11 @@
 #### `createStore`
 
 ```ts
-// Default values for example use
 createStore({
-	allowedOrigins = ['*'],
-	id = 'svelte-crossorigin-store:message',
-	iframeSelector = 'iframe',
-	onChange = undefined,
+	allowedOrigins?: '*' | string[];
+	id?: string;
+	iframeSelector?: string;
+	onChange?: (value: any) => void;
 });
 ```
 
