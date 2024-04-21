@@ -27,6 +27,8 @@ const store = createStore('Hello, world');
 const unsubscribe = store.subscribe(value => console.log('State updated:', value));
 ```
 
+:warning: Take note that all linked instances need to be initialized with the same value, otherwise an infinite loop will occur.
+
 ### API
 
 #### `createStore`
