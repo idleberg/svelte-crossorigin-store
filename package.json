@@ -29,9 +29,9 @@
 		"prepare": "husky",
 		"prepublishOnly": "npm run lint && npm run test",
 		"prepack": "npm run build",
-		"start:iframe1": "vite --config .vite-config/iframe.ts --port 3031",
-		"start:iframe2": "vite --config .vite-config/iframe.ts --port 3032",
-		"start:main": "vite --config .vite-config/main.ts --port 3030",
+		"start:iframe1": "vite --config demo/vite.config-iframe.ts --port 3031",
+		"start:iframe2": "vite --config demo/vite.config-iframe.ts --port 3032",
+		"start:main": "vite --config demo/vite.config-main.ts --port 3030",
 		"start": "npm-run-all --parallel start:*"
 	},
 	"devDependencies": {
