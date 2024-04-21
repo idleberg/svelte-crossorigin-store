@@ -20,7 +20,7 @@
 
 ### Import
 
-```svelte
+```ts
 import { createStore } from 'svelte-crossorigin-store';
 
 const store = createStore('Hello, world');
