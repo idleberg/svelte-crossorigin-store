@@ -1,6 +1,7 @@
 {
 	"name": "svelte-crossorigin-store",
 	"version": "0.1.0",
+	"description": "Share your Svelte store across origins, including iFrames",
 	"type": "module",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -15,9 +16,13 @@
 		"LICENSE",
 		"README.md"
 	],
+	"categories": [
+		"stores-and-state"
+	],
 	"engines": {
 		"node": ">=18.0.0"
 	},
+	"npm": "svelte-crossorigin-store",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/idleberg/svelte-crossorigin-store.git"
