@@ -29,10 +29,8 @@
 		"node": ">=18.0.0"
 	},
 	"npm": "svelte-crossorigin-store",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/idleberg/svelte-crossorigin-store.git"
-	},
+	"url": "https://github.com/idleberg/svelte-crossorigin-store",
+	"repository": "https://github.com/idleberg/svelte-crossorigin-store",
 	"scripts": {
 		"build": "tsup",
 		"dev": "npm run build -- --watch",
