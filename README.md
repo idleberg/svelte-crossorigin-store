@@ -21,13 +21,10 @@
 ### Import
 
 ```svelte
-<script>
-	import { createStore } from 'svelte-crossorigin-store';
+import { createStore } from 'svelte-crossorigin-store';
 
-	const store = createStore('Hello, world');
-</script>
-
-<p>Current state: {$store}</p>
+const store = createStore('Hello, world');
+const unsubscribe = store.subscribe(value => console.log(`State updated:`, value));
 ```
 
 ### API
@@ -55,8 +52,4 @@ Please refer to the [official documentation](https://svelte.dev/docs/svelte-stor
 
 ## License
 
-This work is licensed under [The MIT License](LICENSE)
-
-[dot notation]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors#Dot_notation
-[storage api]: https://developer.mozilla.org/en-US/docs/Web/API/Storage
-[indexeddb api]: https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API
+This work is licensed under [The MIT License](LICENSE).
