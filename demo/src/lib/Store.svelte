@@ -7,7 +7,7 @@
     import Reset from "carbon-icons-svelte/lib/Reset.svelte";
 
     const store = createStore(1, {
-        callback: (value) => {
+        onChanged: (value) => {
             localStorage.setItem('counter', value);
         }
     });
@@ -23,7 +23,7 @@
         <Tag type="outline">{window?.location?.host}</Tag>
         <Tag type="high-contrast">Current Value: {$store}</Tag>
     </h2>
-    
+
     <ButtonSet>
         <Button icon={Add} on:click={() => clickHandler(1)}>Add</Button>
         <Button icon={Subtract} on:click={() => clickHandler(-1)}>Subtract</Button>

@@ -27,10 +27,24 @@
 	const store = createStore('Hello, world');
 </script>
 
-<p>{$store}</p>
+<p>Current state: {$store}</p>
 ```
 
-### Methods
+### API
+
+#### `createStore`
+
+```ts
+// Default values for example use
+createStore({
+	allowedOrigins = ['*'],
+	id = 'svelte-crossorigin-store:message',
+	iframeSelector = 'iframe',
+	onChanged = undefined,
+});
+```
+
+#### Methods
 
 The created store exposes the same API methods like a writable `svelte/store`:
 

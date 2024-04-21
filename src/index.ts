@@ -1,16 +1,32 @@
-import { writable, type Invalidator, type Subscriber } from 'svelte/store';
+import { writable, type Invalidator, type Subscriber, type Writable } from 'svelte/store';
 
 type Options = {
-	id?: string;
 	allowedOrigins?: string[];
-	callback?: (value: any) => void;
+	id?: string;
+	iframeSelector?: string;
+	onChanged?: (value: any) => void;
 };
-
+/**
+ * Creates a writable Svelte store.
+ * @param {any} initialValue
+ * @param {Options} options
+ * @returns {Writable<any>}
+ * @example
+ * ```ts
+ * createStore({
+ * 	allowedOrigins = ['*'],
+ * 	id = 'svelte-crossorigin-store:message',
+ * 	iframeSelector = 'iframe',
+ * 	onChanged = undefined,
+ * });
+ *```
+ */
 export function createStore(initialValue: any, {
 	allowedOrigins = ['*'],
-	callback = undefined,
 	id = 'svelte-crossorigin-store:message',
-}: Options = {}) {
+	iframeSelector = 'iframe',
+	onChanged = undefined,
+}: Options = {}): Writable<any> {
 	const store = writable(initialValue);
 	const { subscribe, set, update } = store;
 
@@ -42,7 +58,7 @@ export function createStore(initialValue: any, {
 		_postMessageToManyOrigins(window, value);
 
 		if (window.self === window.top) {
-			const iframes = document.querySelectorAll('iframe');
+			const iframes = document.querySelectorAll(iframeSelector);
 
 			iframes.forEach(iframe => {
 				_postMessageToManyOrigins(iframe?.contentWindow, value)
@@ -51,8 +67,8 @@ export function createStore(initialValue: any, {
 			_postMessageToManyOrigins(window.parent, value)
 		}
 
-		if (typeof callback === 'function') {
-			callback(value);
+		if (typeof onChanged === 'function') {
+			onChanged(value);
 		}
 	});
 
