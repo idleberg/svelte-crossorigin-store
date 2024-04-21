@@ -58,10 +58,10 @@ export function createStore(initialValue: any, {
 		_postMessageToManyOrigins(window, value);
 
 		if (window.self === window.top) {
-			const iframes = document.querySelectorAll(iframeSelector);
+			const iframes = document.querySelectorAll(iframeSelector) as NodeListOf<HTMLIFrameElement>;
 
-			iframes.forEach(iframe => {
-				_postMessageToManyOrigins(iframe?.contentWindow, value)
+			iframes?.forEach(iframe => {
+				_postMessageToManyOrigins(iframe.contentWindow, value)
 			});
 		} else {
 			_postMessageToManyOrigins(window.parent, value)
