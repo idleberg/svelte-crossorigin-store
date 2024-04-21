@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { Button, ButtonSet, Tag } from "carbon-components-svelte";
     import { createStore } from '../../../src/index.ts';
 
@@ -6,7 +6,7 @@
     import Subtract from "carbon-icons-svelte/lib/Subtract.svelte";
     import Reset from "carbon-icons-svelte/lib/Reset.svelte";
 
-    const store = createStore(1, {
+    const store = createStore<number>(1, {
         onChange: (value) => {
             localStorage.setItem('counter', value);
         }

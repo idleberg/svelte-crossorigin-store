@@ -21,13 +21,13 @@ type Options = {
  * });
  *```
  */
-export function createStore(initialValue: any, {
+export function createStore<T>(initialValue: T, {
 	allowedOrigins = ['*'],
 	id = 'svelte-crossorigin-store:message',
 	iframeSelector = 'iframe',
 	onChange = undefined,
-}: Options = {}): Writable<any> {
-	const store = writable(initialValue);
+}: Options = {}): Writable<T> {
+	const store = writable<T>(initialValue);
 	const { subscribe, set, update } = store;
 
 	const onMessage = (event: MessageEvent) => {
