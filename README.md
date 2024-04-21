@@ -8,7 +8,7 @@
 
 **Features**
 
-- framesynchronizes across multiple origins
+- synchronizes store across multiple origins
 - supports iFrames
 - tiny (<700 bytes minified, before gzip)
 
