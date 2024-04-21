@@ -40,7 +40,7 @@ createStore({
 	allowedOrigins = ['*'],
 	id = 'svelte-crossorigin-store:message',
 	iframeSelector = 'iframe',
-	onChanged = undefined,
+	onChange = undefined,
 });
 ```
 

@@ -4,7 +4,7 @@ type Options = {
 	allowedOrigins?: string[];
 	id?: string;
 	iframeSelector?: string;
-	onChanged?: (value: any) => void;
+	onChange?: (value: any) => void;
 };
 /**
  * Creates a writable Svelte store.
@@ -17,7 +17,7 @@ type Options = {
  * 	allowedOrigins = ['*'],
  * 	id = 'svelte-crossorigin-store:message',
  * 	iframeSelector = 'iframe',
- * 	onChanged = undefined,
+ * 	onChange = undefined,
  * });
  *```
  */
@@ -25,7 +25,7 @@ export function createStore(initialValue: any, {
 	allowedOrigins = ['*'],
 	id = 'svelte-crossorigin-store:message',
 	iframeSelector = 'iframe',
-	onChanged = undefined,
+	onChange = undefined,
 }: Options = {}): Writable<any> {
 	const store = writable(initialValue);
 	const { subscribe, set, update } = store;
@@ -67,8 +67,8 @@ export function createStore(initialValue: any, {
 			_postMessageToManyOrigins(window.parent, value)
 		}
 
-		if (typeof onChanged === 'function') {
-			onChanged(value);
+		if (typeof onChange === 'function') {
+			onChange(value);
 		}
 	});
 

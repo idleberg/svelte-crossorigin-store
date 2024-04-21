@@ -7,7 +7,7 @@
     import Reset from "carbon-icons-svelte/lib/Reset.svelte";
 
     const store = createStore(1, {
-        onChanged: (value) => {
+        onChange: (value) => {
             localStorage.setItem('counter', value);
         }
     });
