@@ -28,7 +28,7 @@ const store = createStore('Hello, world');
 const unsubscribe = store.subscribe(value => console.log('State updated:', value));
 ```
 
-Or, the equivalent in your svelte component:
+Or, in your Svelte component:
 
 ```svelte
 <script>
