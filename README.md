@@ -40,7 +40,7 @@ Or, in your Svelte component:
 <p>Current State: {$store}</p>
 ```
 
-:warning: Take note that all linked instances need to be initialized with the same value, otherwise an infinite loop will occur.
+:warning: Take note that the API doesn't follow a publisher/subscriber approach. Hence, you need to make sure that instances are not initialized with the same value. Otherwise, an infinite loop will occur.
 
 ### API
 
