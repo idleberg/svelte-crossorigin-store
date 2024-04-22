@@ -8,6 +8,7 @@
 
 **Features**
 
+- made for Svelte, works anywhere
 - synchronizes store across multiple origins
 - supports iFrames
 - tiny (~450 bytes minified+gzipped)
@@ -25,6 +26,18 @@ import { createStore } from 'svelte-crossorigin-store';
 
 const store = createStore('Hello, world');
 const unsubscribe = store.subscribe(value => console.log('State updated:', value));
+```
+
+Or, the equivalent in your svelte component:
+
+```svelte
+<script>
+	import { createStore } from 'svelte-crossorigin-store';
+
+	const store = createStore('Hello, world');
+</script>
+
+<p>Current State: {$store}</p>
 ```
 
 :warning: Take note that all linked instances need to be initialized with the same value, otherwise an infinite loop will occur.
