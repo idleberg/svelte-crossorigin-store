@@ -35,7 +35,7 @@ const unsubscribe = store.subscribe(value => console.log('State updated:', value
 
 ```ts
 createStore<T>(initialValue?: T, {
-	allowedOrigins?: '*' | string[];
+	allowedOrigins?: string[];
 	id?: string;
 	iframeSelector?: string;
 	onChange?: (value: any) => void;
