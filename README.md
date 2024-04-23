@@ -67,7 +67,7 @@ Please refer to the [official documentation](https://svelte.dev/docs/svelte-stor
 
 ## Demo
 
-This repository contains a demo application of a classic counter that synchronizes its state across three origins.
+This repository contains a demo application of a classic counter that synchronizes its state across three origins: the parent page and two iFrames running on different ports.
 
 To launch the application, run the following:
 
