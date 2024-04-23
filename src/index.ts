@@ -6,6 +6,7 @@ type Options = {
 	iframeSelector?: string;
 	onChange?: (value: any) => void;
 };
+
 /**
  * Creates a writable Svelte store.
  * @param {any} initialValue
