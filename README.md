@@ -65,6 +65,18 @@ The created store exposes the same API methods like a writable `svelte/store`:
 
 Please refer to the [official documentation](https://svelte.dev/docs/svelte-store#writable).
 
+## Demo
+
+This repository contains a demo application of a classic counter that synchronizes its state across three origins.
+
+To launch the application, run the following:
+
+```sh
+pnpm start
+```
+
+Next, open `https://localhost:3030` in your browser.
+
 ## License
 
 This work is licensed under [The MIT License](LICENSE).
