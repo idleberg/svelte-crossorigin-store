@@ -75,7 +75,7 @@ To launch the application, run the following:
 pnpm start
 ```
 
-Next, open `https://localhost:3030` in your browser.
+This should automatically open `https://localhost:3030` in your default browser.
 
 ## License
 
