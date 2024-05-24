@@ -12,7 +12,7 @@
         }
     });
 
-    const clickHandler = (value = 0) => {
+    const clickHandler = (value: null | number = 0) => {
         store.update(counter => value === null ? 0 : counter + value);
     }
 </script>
