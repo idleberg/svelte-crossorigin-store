@@ -38,14 +38,12 @@ export function createStore<T>(initialValue: T, {
 	};
 
 	const _sharedSubscribe = (run: Subscriber<any>, invalidate: Invalidator<any> = () => { }) => {
-		const unsubscribe = subscribe(run, invalidate);
+		subscribe(run, invalidate);
 
 		window.addEventListener('message', onMessage);
 
 		return () => {
 			window.removeEventListener('message', onMessage);
-
-			unsubscribe();
 		};
 	};
 
