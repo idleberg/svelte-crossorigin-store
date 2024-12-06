@@ -3,12 +3,14 @@
 	"version": "0.1.1",
 	"description": "Share your Svelte store across origins, including iFrames",
 	"type": "module",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.ts",
 	"exports": {
-		".": {
-			"import": "./dist/index.js",
-			"types": "./dist/index.d.ts"
+		"./iframe": {
+			"import": "./dist/iframe.js",
+			"types": "./dist/iframe.d.ts"
+		},
+		"./window": {
+			"import": "./dist/window.js",
+			"types": "./dist/window.d.ts"
 		}
 	},
 	"files": [

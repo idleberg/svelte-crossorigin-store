@@ -5,7 +5,10 @@ export default defineConfig((options) => {
 		target: 'esnext',
 		clean: true,
 		dts: !options.watch,
-		entry: ['src/index.ts'],
+		entry: [
+			'src/iframe.ts',
+			'src/window.ts',
+		],
 		format: 'esm',
 		minify: !options.watch,
 		treeshake: 'recommended'

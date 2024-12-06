@@ -22,9 +22,9 @@
 ### Import
 
 ```ts
-import { createStore } from 'svelte-crossorigin-store';
+import { createWritableStore } from 'svelte-crossorigin-store/iframe';
 
-const store = createStore('Hello, world');
+const store = createWritableStore('Hello, world');
 const unsubscribe = store.subscribe(value => console.log('State updated:', value));
 ```
 
@@ -32,9 +32,9 @@ Or, in your Svelte component:
 
 ```svelte
 <script>
-	import { createStore } from 'svelte-crossorigin-store';
+	import { createWritableStore } from 'svelte-crossorigin-store/iframe';
 
-	const store = createStore('Hello, world');
+	const store = createWritableStore('Hello, world');
 </script>
 
 <p>Current State: {$store}</p>
@@ -44,7 +44,7 @@ Or, in your Svelte component:
 
 ### API
 
-#### `createStore`
+#### `createWritableStore`
 
 ```ts
 createStore<T>(initialValue?: T, {

@@ -3,29 +3,26 @@ import { writable, type Invalidator, type Subscriber, type Writable } from 'svel
 type Options = {
 	allowedOrigins?: string[];
 	id?: string;
-	iframeSelector?: string;
 	onChange?: (value: any) => void;
 };
 
 /**
  * Creates a writable Svelte store.
- * @param {any} initialValue
- * @param {Options} options
- * @returns {Writable<any>}
+ * @param initialValue
+ * @param options
+ * @returns
  * @example
  * ```ts
  * createStore({
  * 	allowedOrigins = ['*'],
  * 	id = 'svelte-crossorigin-store:message',
- * 	iframeSelector = 'iframe',
  * 	onChange = undefined,
  * });
  *```
  */
-export function createStore<T>(initialValue: T, {
+export function createWritableStore<T>(initialValue: T, {
 	allowedOrigins = ['*'],
 	id = 'svelte-crossorigin-store:message',
-	iframeSelector = 'iframe',
 	onChange = undefined,
 }: Options = {}): Writable<T> {
 	const store = writable<T>(initialValue);
@@ -47,7 +44,7 @@ export function createStore<T>(initialValue: T, {
 		};
 	};
 
-	const _postMessageToManyOrigins = (target: HTMLIFrameElement['contentWindow'] | Window, value: any) => {
+	const _postMessageToManyOrigins = (target: Window, value: any) => {
 		allowedOrigins.forEach(origin => {
 			target?.postMessage({ id, value }, origin);
 		});
@@ -55,16 +52,6 @@ export function createStore<T>(initialValue: T, {
 
 	store.subscribe(value => {
 		_postMessageToManyOrigins(window, value);
-
-		if (window.self === window.top) {
-			const iframes = document.querySelectorAll(iframeSelector) as NodeListOf<HTMLIFrameElement>;
-
-			iframes?.forEach(iframe => {
-				_postMessageToManyOrigins(iframe.contentWindow, value)
-			});
-		} else {
-			_postMessageToManyOrigins(window.parent, value)
-		}
 
 		if (typeof onChange === 'function') {
 			onChange(value);
