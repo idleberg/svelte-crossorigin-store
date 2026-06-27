@@ -11,6 +11,14 @@
 		"./window": {
 			"import": "./dist/window.js",
 			"types": "./dist/window.d.ts"
+		},
+		"./broadcast": {
+			"import": "./dist/broadcast.js",
+			"types": "./dist/broadcast.d.ts"
+		},
+		"./popup": {
+			"import": "./dist/popup.js",
+			"types": "./dist/popup.d.ts"
 		}
 	},
 	"files": [
@@ -34,44 +42,31 @@
 	"scripts": {
 		"build": "tsup",
 		"dev": "npm run build -- --watch",
-		"lint:json": "eslint ./*.json --ignore-path .gitignore",
-		"lint:ts": "eslint ./src --ignore-path .gitignore",
-		"lint": "npm-run-all --parallel lint:*",
-		"prepare": "husky",
 		"prepublishOnly": "npm run lint && npm run test",
 		"prepack": "npm run build",
-		"start:iframe1": "vite --config demo/vite.config-iframe.ts --strictPort --port 3031",
-		"start:iframe2": "vite --config demo/vite.config-iframe.ts --strictPort --port 3032",
-		"start:main": "vite --config demo/vite.config-main.ts --open --strictPort --port 3030",
+		"start:iframe1": "cd playground && npx vite dev --strictPort --port 3031",
+		"start:iframe2": "cd playground && npx vite dev --strictPort --port 3032",
+		"start:main": "cd playground && npx vite dev --open --strictPort --port 3030",
 		"start": "npm-run-all --parallel start:*",
-		"test": "exit 0"
+		"test": "vitest run",
+		"test:e2e": "playwright test"
 	},
 	"devDependencies": {
-		"@sveltejs/vite-plugin-svelte": "^3.0.2",
-		"@tsconfig/svelte": "^5.0.2",
-		"@types/node": "^18",
-		"@typescript-eslint/eslint-plugin": "^6.15.0",
-		"@typescript-eslint/parser": "^6.15.0",
-		"carbon-components-svelte": "^0.85.0",
-		"carbon-icons-svelte": "^12.6.0",
-		"eslint-plugin-json": "^3.1.0",
-		"eslint": "^8.56.0",
-		"husky": "^9.0.11",
-		"lint-staged": "^15.2.2",
+		"@playwright/test": "^1.61.1",
+		"@types/node": "^26.0.1",
+		"@vitest/browser": "^4.1.9",
+		"@vitest/browser-playwright": "^4.1.9",
 		"npm-run-all2": "^6.1.2",
-		"sass": "^1.75.0",
+		"playwright": "^1.61.1",
 		"svelte": "^4.2.12",
 		"tslib": "^2.6.2",
 		"tsup": "^8.0.2",
 		"typescript": "^5.2.2",
-		"vite": "^5.2.0",
-		"vite-plugin-mkcert": "^1.17.5"
+		"vite": "^6.4.3",
+		"vitest": "^4.1.9"
 	},
 	"peerDependencies": {
 		"svelte": "^4"
 	},
-	"lint-staged": {
-		"*.(ts|json)": "eslint --cache --fix"
-	},
-	"packageManager": "pnpm@9.0.4+sha512.c374b52de3de88c58fd8333df664a737279cdb0e1344ba4054d3b1fffa9a1a3670854f755dca4f16adea3f14be9896a7fcaf167409fe0c1ad60475271dafe81a"
+	"packageManager": "pnpm@10.9.0+sha512.0486e394640d3c1fb3c9d43d49cf92879ff74f8516959c235308f5a8f62e2e19528a65cdc2a3058f587cde71eba3d5b56327c8c33a97e4c4051ca48a10ca2d5f"
 }

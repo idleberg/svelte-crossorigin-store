@@ -1,3 +1,10 @@
 {
-  "recommendations": ["svelte.svelte-vscode"]
+	"recommendations": [
+		"dbaeumer.vscode-eslint",
+		"editorconfig.editorconfig",
+		"esbenp.prettier-vscode",
+		"ms-playwright.playwright",
+		"svelte.svelte-vscode",
+		"vitest.explorer"
+	]
 }

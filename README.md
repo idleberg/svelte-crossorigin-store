@@ -10,8 +10,9 @@
 
 - made for Svelte, works anywhere
 - synchronizes store across multiple origins
-- supports iFrames
-- tiny (~450 bytes minified+gzipped)
+- supports iFrames, popup windows, same-page scripts, and cross-tab sync
+- automatic initial state handshake
+- tiny (~450 bytes minified+gzipped per entrypoint)
 
 ## Installation
 
@@ -19,55 +20,147 @@
 
 ## Usage
 
-### Import
+The library provides four entrypoints, each targeting a different communication mechanism:
 
-```ts
-import { createWritableStore } from 'svelte-crossorigin-store/iframe';
+| Entrypoint | Use Case | API |
+|---|---|---|
+| `svelte-crossorigin-store/iframe` | Parent page ↔ iFrames (cross-origin) | `postMessage` |
+| `svelte-crossorigin-store/popup` | Parent page ↔ popup windows | `postMessage` |
+| `svelte-crossorigin-store/window` | Same-page scripts (e.g. first-party ↔ third-party) | `postMessage` |
+| `svelte-crossorigin-store/broadcast` | Same-origin tabs | `BroadcastChannel` |
 
-const store = createWritableStore('Hello, world');
-const unsubscribe = store.subscribe(value => console.log('State updated:', value));
-```
+The iframe, window, and broadcast entrypoints export `createWritableStore`, which returns a standard Svelte `Writable` store. The popup entrypoint exports both `createPopupStore` (for the parent) and `createWritableStore` (for the popup child).
 
-Or, in your Svelte component:
+### iFrame
+
+Synchronizes state between a parent page and its iFrames. The parent automatically relays updates between sibling iFrames.
 
 ```svelte
 <script>
-	import { createWritableStore } from 'svelte-crossorigin-store/iframe';
+  import { createWritableStore } from 'svelte-crossorigin-store/iframe';
 
-	const store = createWritableStore('Hello, world');
+  const counter = createWritableStore(0, {
+    allowedOrigins: ['https://example.com'],
+  });
 </script>
 
-<p>Current State: {$store}</p>
+<p>Current Value: {$counter}</p>
 ```
 
-:warning: Take note that the API doesn't follow a publisher/subscriber approach. Hence, you need to make sure that instances are not initialized with the same value. Otherwise, an infinite loop will occur!
-
-### API
-
-#### `createWritableStore`
+#### Options
 
 ```ts
-createStore<T>(initialValue?: T, {
-	allowedOrigins?: string[];
-	id?: string;
-	iframeSelector?: string;
-	onChange?: (value: any) => void;
+createWritableStore<T>(initialValue: T, {
+  allowedOrigins?: string[];   // Origins to accept messages from (default: ['*'])
+  id?: string;                 // Message channel identifier (default: 'svelte-crossorigin-store:message')
+  iframeSelector?: string;     // CSS selector for target iFrames (default: 'iframe')
+  onChange?: (value: T) => void;
 });
 ```
 
-#### Methods
+### Popup
 
-The created store exposes the same API methods like a writable `svelte/store`:
+Synchronizes state between a parent page and popup windows opened via `window.open()`. The parent uses `createPopupStore`, which returns a `store` and an `open` function. Popups use `createWritableStore` and automatically sync back via `window.opener`.
 
-- `set()`
-- `update()`
-- `subscribe()`
+**Parent page:**
 
-Please refer to the [official documentation](https://svelte.dev/docs/svelte-store#writable).
+```svelte
+<script>
+  import { createPopupStore } from 'svelte-crossorigin-store/popup';
 
-## Demo
+  const { store, open } = createPopupStore(0, {
+    url: '/popup-page',
+    allowedOrigins: ['https://example.com'],
+  });
+</script>
 
-This repository contains a demo application of a classic counter that synchronizes its state across three origins: the parent page and two iFrames running on different ports.
+<button on:click={() => open()}>Open Popup</button>
+<p>Current Value: {$store}</p>
+```
+
+**Popup page:**
+
+```ts
+import { createWritableStore } from 'svelte-crossorigin-store/popup';
+
+const store = createWritableStore(0, {
+  allowedOrigins: ['https://example.com'],
+});
+```
+
+#### Options
+
+`createPopupStore`:
+
+```ts
+createPopupStore<T>(initialValue: T, {
+  url: string;                 // URL to open in the popup (required)
+  features?: string;           // window.open() features string (e.g. 'width=400,height=300')
+  allowedOrigins?: string[];   // Origins to accept messages from (default: ['*'])
+  id?: string;                 // Message channel identifier (default: 'svelte-crossorigin-store:message')
+  onChange?: (value: T) => void;
+});
+// Returns: { store: Writable<T>, open: () => Window | null }
+```
+
+`createWritableStore` (popup child) accepts the same options as the [Window](#window) entrypoint.
+
+### Window
+
+Synchronizes state between scripts on the same page via `postMessage` to `window`. Useful for communicating between a first-party Svelte app and third-party scripts.
+
+```ts
+import { createWritableStore } from 'svelte-crossorigin-store/window';
+
+const store = createWritableStore(0, {
+  allowedOrigins: ['https://example.com'],
+});
+```
+
+#### Options
+
+```ts
+createWritableStore<T>(initialValue: T, {
+  allowedOrigins?: string[];   // Origins to accept messages from (default: ['*'])
+  id?: string;                 // Message channel identifier (default: 'svelte-crossorigin-store:message')
+  onChange?: (value: T) => void;
+});
+```
+
+### Broadcast
+
+Synchronizes state across browser tabs on the same origin using the `BroadcastChannel` API.
+
+```ts
+import { createWritableStore } from 'svelte-crossorigin-store/broadcast';
+
+const store = createWritableStore(0, {
+  channelName: 'my-counter',
+});
+```
+
+#### Options
+
+```ts
+createWritableStore<T>(initialValue: T, {
+  channelName?: string;        // BroadcastChannel name (default: 'svelte-crossorigin-store')
+  onChange?: (value: T) => void;
+});
+```
+
+### Methods
+
+All stores expose the standard Svelte writable store API:
+
+- `set(value)`
+- `update(updater)`
+- `subscribe(subscriber)`
+
+Refer to the [official documentation](https://svelte.dev/docs/svelte-store#writable) for details.
+
+## Playground
+
+This repository contains a playground application of a classic counter that synchronizes its state across three origins: the parent page and two iFrames running on different ports.
 
 To launch the application, run the following:
 

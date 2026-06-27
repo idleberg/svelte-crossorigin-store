@@ -8,6 +8,8 @@ export default defineConfig((options) => {
 		entry: [
 			'src/iframe.ts',
 			'src/window.ts',
+			'src/broadcast.ts',
+			'src/popup.ts',
 		],
 		format: 'esm',
 		minify: !options.watch,
