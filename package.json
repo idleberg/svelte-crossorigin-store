@@ -6,20 +6,20 @@
 	"type": "module",
 	"exports": {
 		"./iframe": {
-			"import": "./dist/iframe.js",
-			"types": "./dist/iframe.d.ts"
+			"types": "./dist/iframe.d.mts",
+			"import": "./dist/iframe.mjs"
 		},
 		"./window": {
-			"import": "./dist/window.js",
-			"types": "./dist/window.d.ts"
+			"types": "./dist/window.d.mts",
+			"import": "./dist/window.mjs"
 		},
 		"./broadcast": {
-			"import": "./dist/broadcast.js",
-			"types": "./dist/broadcast.d.ts"
+			"types": "./dist/broadcast.d.mts",
+			"import": "./dist/broadcast.mjs"
 		},
 		"./popup": {
-			"import": "./dist/popup.js",
-			"types": "./dist/popup.d.ts"
+			"types": "./dist/popup.d.mts",
+			"import": "./dist/popup.mjs"
 		}
 	},
 	"files": [
@@ -45,7 +45,7 @@
 		"dev": "npm run build -- --watch",
 		"lint": "concurrently npm:lint:*",
 		"lint:biome": "biome check",
-		"lint:e18e": "e18e-cli analyze",
+		"lint:e18e": "e18e-cli analyze --log-level error",
 		"prepublishOnly": "npm run build",
 		"start:iframe1": "cd playground && npx vite dev --strictPort --port 3031",
 		"start:iframe2": "cd playground && npx vite dev --strictPort --port 3032",
