@@ -1,66 +1,27 @@
-import { writable, type Invalidator, type Subscriber, type Writable } from 'svelte/store';
-
-type Options = {
-	allowedOrigins?: string[];
-	id?: string;
-	onChange?: (value: any) => void;
-};
+import { type Writable } from 'svelte/store';
+import { createCrossOriginStore, type CoreOptions } from './core';
 
 /**
- * Creates a writable Svelte store.
- * @param initialValue
- * @param options
- * @returns
+ * Creates a writable Svelte store that synchronizes with third-party scripts on the same page.
+ * Uses postMessage to window (self-messaging) with origin filtering for security.
+ * @param initialValue - The initial value for the store
+ * @param options - Configuration options
+ * @returns A Writable store that syncs via postMessage on the same window
  * @example
  * ```ts
- * createStore({
- * 	allowedOrigins = ['*'],
- * 	id = 'svelte-crossorigin-store:message',
- * 	onChange = undefined,
+ * const store = createWritableStore(0, {
+ * 	allowedOrigins: ['https://example.com'],
+ * 	onChange: (value) => console.log('Changed:', value),
  * });
- *```
+ * ```
  */
-export function createWritableStore<T>(initialValue: T, {
-	allowedOrigins = ['*'],
-	id = 'svelte-crossorigin-store:message',
-	onChange = undefined,
-}: Options = {}): Writable<T> {
-	const store = writable<T>(initialValue);
-	const { subscribe, set, update } = store;
-
-	const onMessage = (event: MessageEvent) => {
-		if ((allowedOrigins.includes(event.origin) || allowedOrigins.includes('*')) && event.data.id === id) {
-			set(event.data.value);
-		}
-	};
-
-	const _sharedSubscribe = (run: Subscriber<any>, invalidate: Invalidator<any> = () => { }) => {
-		subscribe(run, invalidate);
-
-		window.addEventListener('message', onMessage);
-
-		return () => {
-			window.removeEventListener('message', onMessage);
-		};
-	};
-
-	const _postMessageToManyOrigins = (target: Window, value: any) => {
-		allowedOrigins.forEach(origin => {
-			target?.postMessage({ id, value }, origin);
-		});
-	}
-
-	store.subscribe(value => {
-		_postMessageToManyOrigins(window, value);
-
-		if (typeof onChange === 'function') {
-			onChange(value);
-		}
-	});
-
-	return {
-		subscribe: _sharedSubscribe,
-		set,
-		update,
-	};
+export function createWritableStore<T>(
+	initialValue: T,
+	options: CoreOptions<T> = {}
+): Writable<T> {
+	return createCrossOriginStore(
+		initialValue,
+		options,
+		() => [window]
+	);
 }

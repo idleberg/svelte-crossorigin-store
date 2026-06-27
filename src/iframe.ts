@@ -1,80 +1,37 @@
+import { type Writable } from "svelte/store";
+import { createCrossOriginStore, type CoreOptions } from "./core.ts";
 
-import { writable, type Invalidator, type Subscriber, type Writable } from 'svelte/store';
-
-type Options = {
-	allowedOrigins?: string[];
-	id?: string;
+type IframeOptions<T> = CoreOptions<T> & {
 	iframeSelector?: string;
-	onChange?: (value: any) => void;
 };
 
 /**
- * Creates a writable Svelte store.
- * @param {any} initialValue
- * @param {Options} options
- * @returns {Writable<any>}
+ * Creates a writable Svelte store that synchronizes across iframe boundaries.
+ * Works bidirectionally: parent can sync with iframes, iframes can sync with parent.
+ * @param initialValue - The initial value for the store
+ * @param options - Configuration options
+ * @returns A Writable store that syncs across iframes
  * @example
  * ```ts
- * createStore({
- * 	allowedOrigins = ['*'],
- * 	id = 'svelte-crossorigin-store:message',
- * 	iframeSelector = 'iframe',
- * 	onChange = undefined,
+ * const store = createWritableStore(0, {
+ * 	allowedOrigins: ['https://example.com'],
+ * 	iframeSelector: 'iframe.synced',
+ * 	onChange: (value) => console.log('Changed:', value),
  * });
- *```
+ * ```
  */
-export function createWritableStore<T>(initialValue: T, {
-	allowedOrigins = ['*'],
-	id = 'svelte-crossorigin-store:message',
-	iframeSelector = 'iframe',
-	onChange = undefined,
-}: Options = {}): Writable<T> {
-	const store = writable<T>(initialValue);
-	const { subscribe, set, update } = store;
-
-	const onMessage = (event: MessageEvent) => {
-		if ((allowedOrigins.includes(event.origin) || allowedOrigins.includes('*')) && event.data.id === id) {
-			set(event.data.value);
-		}
-	};
-
-	const _sharedSubscribe = (run: Subscriber<any>, invalidate: Invalidator<any> = () => { }) => {
-		subscribe(run, invalidate);
-
-		window.addEventListener('message', onMessage);
-
-		return () => {
-			window.removeEventListener('message', onMessage);
-		};
-	};
-
-	const _postMessageToManyOrigins = (target: HTMLIFrameElement['contentWindow'], value: any) => {
-		allowedOrigins.forEach(origin => {
-			target?.postMessage({ id, value }, origin);
-		});
-	}
-
-	store.subscribe(value => {
-
+export function createWritableStore<T>(
+	initialValue: T,
+	{ iframeSelector = "iframe", ...coreOptions }: IframeOptions<T> = {},
+): Writable<T> {
+	return createCrossOriginStore(initialValue, coreOptions, () => {
 		if (window.self === window.top) {
-			const iframes = document.querySelectorAll(iframeSelector) as NodeListOf<HTMLIFrameElement>;
-
-			iframes?.forEach(iframe => {
-				_postMessageToManyOrigins(iframe.contentWindow, value)
-			});
-		} else {
-			_postMessageToManyOrigins(window.parent, value);
-			return;
+			const iframes = document.querySelectorAll(
+				iframeSelector,
+			) as NodeListOf<HTMLIFrameElement>;
+			return Array.from(iframes, (iframe) => iframe.contentWindow);
 		}
 
-		if (typeof onChange === 'function') {
-			onChange(value);
-		}
+		return [window.parent];
 	});
-
-	return {
-		subscribe: _sharedSubscribe,
-		set,
-		update,
-	};
 }
