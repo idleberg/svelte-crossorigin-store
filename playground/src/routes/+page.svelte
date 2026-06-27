@@ -1,5 +1,5 @@
 <script>
-	import { Column, Grid, Row,UnorderedList, ListItem } from "carbon-components-svelte";
+import { Column, Grid, ListItem, Row, UnorderedList } from 'carbon-components-svelte';
 </script>
 
 <svelte:head>

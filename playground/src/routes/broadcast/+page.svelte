@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Column, Grid, Row } from "carbon-components-svelte";
-	import { createWritableStore } from "svelte-crossorigin-store/broadcast";
-	import Store from "$lib/Store.svelte";
+import { Column, Grid, Row } from 'carbon-components-svelte';
+import { createWritableStore } from 'svelte-crossorigin-store/broadcast';
+import Store from '$lib/Store.svelte';
 
-	const store = createWritableStore<number>(0);
+const store = createWritableStore<number>(0);
 </script>
 
 <svelte:head>

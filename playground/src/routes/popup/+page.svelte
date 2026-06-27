@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { Button, Column, Grid, Row } from "carbon-components-svelte";
-	import { createPopupStore } from "svelte-crossorigin-store/popup";
-	import Store from "$lib/Store.svelte";
+import { Button, Column, Grid, Row } from 'carbon-components-svelte';
+import { createPopupStore } from 'svelte-crossorigin-store/popup';
+import Store from '$lib/Store.svelte';
 
-	const { store, open } = createPopupStore<number>(0, {
-		url: "/popup/child",
-		allowedOrigins: ["*"],
-	});
+const { store, open } = createPopupStore<number>(0, {
+	url: '/popup/child',
+	allowedOrigins: ['*'],
+});
 </script>
 
 <svelte:head>

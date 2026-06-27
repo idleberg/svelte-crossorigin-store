@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { createWritableStore } from "svelte-crossorigin-store/iframe";
-	import Store from "$lib/Store.svelte";
+import { createWritableStore } from 'svelte-crossorigin-store/iframe';
+import Store from '$lib/Store.svelte';
 
-	const store = createWritableStore<number>(1, {
-		onChange: (value) => {
-			localStorage.setItem("counter", String(value));
-		},
-	});
+const store = createWritableStore<number>(1, {
+	onChange: (value) => {
+		localStorage.setItem('counter', String(value));
+	},
+});
 </script>
 
 <svelte:head>

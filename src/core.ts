@@ -1,4 +1,4 @@
-import { writable, type Invalidator, type Subscriber, type Writable } from 'svelte/store';
+import { type Invalidator, type Subscriber, type Writable, writable } from 'svelte/store';
 
 export type CoreOptions<T> = {
 	allowedOrigins?: string[];
@@ -24,12 +24,8 @@ type MessageData<T> = {
  */
 export function createCrossOriginStore<T>(
 	initialValue: T,
-	{
-		allowedOrigins = ['*'],
-		id = 'svelte-crossorigin-store:message',
-		onChange = undefined,
-	}: CoreOptions<T>,
-	getTargets: () => (Window | null)[]
+	{ allowedOrigins = ['*'], id = 'svelte-crossorigin-store:message', onChange = undefined }: CoreOptions<T>,
+	getTargets: () => (Window | null)[],
 ): Writable<T> {
 	const store = writable<T>(initialValue);
 	const { subscribe, set, update } = store;
@@ -75,7 +71,10 @@ export function createCrossOriginStore<T>(
 		if (type === 'request' && event.source) {
 			for (const origin of allowedOrigins) {
 				try {
-					(event.source as Window).postMessage({ id, type: 'response', sender, value: currentValue } satisfies MessageData<T>, origin);
+					(event.source as Window).postMessage(
+						{ id, type: 'response', sender, value: currentValue } satisfies MessageData<T>,
+						origin,
+					);
 				} catch {
 					// Source window may be closed
 				}
@@ -103,13 +102,13 @@ export function createCrossOriginStore<T>(
 		}
 	};
 
-	const enhancedSubscribe = (run: Subscriber<T>, invalidate: Invalidator<T> = () => { }) => {
+	const enhancedSubscribe = (run: Subscriber<T>, invalidate: Invalidator<T> = () => {}) => {
 		subscriberCount++;
 
 		if (subscriberCount === 1) {
 			window.addEventListener('message', onMessage);
 
-			unsubscribeInternal = store.subscribe(value => {
+			unsubscribeInternal = store.subscribe((value) => {
 				currentValue = value;
 
 				if (!initialized) {

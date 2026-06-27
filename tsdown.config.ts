@@ -5,13 +5,8 @@ export default defineConfig((options) => {
 		target: 'esnext',
 		clean: true,
 		dts: !options.watch,
-		entry: [
-			'src/iframe.ts',
-			'src/window.ts',
-			'src/broadcast.ts',
-			'src/popup.ts',
-		],
+		entry: ['src/iframe.ts', 'src/window.ts', 'src/broadcast.ts', 'src/popup.ts'],
 		format: 'esm',
 		minify: !options.watch,
-	}
+	};
 });

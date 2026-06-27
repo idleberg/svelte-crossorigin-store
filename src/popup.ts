@@ -1,5 +1,5 @@
-import { type Writable } from "svelte/store";
-import { createCrossOriginStore, type CoreOptions } from "./core.ts";
+import type { Writable } from 'svelte/store';
+import { type CoreOptions, createCrossOriginStore } from './core.ts';
 
 type PopupOptions<T> = CoreOptions<T> & {
 	url: string;
@@ -35,7 +35,7 @@ export function createPopupStore<T>(
 	});
 
 	const open = () => {
-		const popup = window.open(url, "_blank", features);
+		const popup = window.open(url, '_blank', features);
 		if (popup) popups.add(popup);
 		return popup;
 	};
@@ -56,10 +56,7 @@ export function createPopupStore<T>(
  * });
  * ```
  */
-export function createWritableStore<T>(
-	initialValue: T,
-	options: CoreOptions<T> = {},
-): Writable<T> {
+export function createWritableStore<T>(initialValue: T, options: CoreOptions<T> = {}): Writable<T> {
 	return createCrossOriginStore(initialValue, options, () => {
 		return window.opener ? [window.opener] : [];
 	});

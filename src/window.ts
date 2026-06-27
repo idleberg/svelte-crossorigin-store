@@ -1,5 +1,5 @@
-import { type Writable } from 'svelte/store';
-import { createCrossOriginStore, type CoreOptions } from './core';
+import type { Writable } from 'svelte/store';
+import { type CoreOptions, createCrossOriginStore } from './core';
 
 /**
  * Creates a writable Svelte store that synchronizes with third-party scripts on the same page.
@@ -15,13 +15,6 @@ import { createCrossOriginStore, type CoreOptions } from './core';
  * });
  * ```
  */
-export function createWritableStore<T>(
-	initialValue: T,
-	options: CoreOptions<T> = {}
-): Writable<T> {
-	return createCrossOriginStore(
-		initialValue,
-		options,
-		() => [window]
-	);
+export function createWritableStore<T>(initialValue: T, options: CoreOptions<T> = {}): Writable<T> {
+	return createCrossOriginStore(initialValue, options, () => [window]);
 }

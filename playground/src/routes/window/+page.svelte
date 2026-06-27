@@ -1,22 +1,22 @@
 <script lang="ts">
-	import { Column, Grid, Row, TextInput, Button } from "carbon-components-svelte";
-	import { createWritableStore } from "svelte-crossorigin-store/window";
-	import { onMount } from "svelte";
+import { Button, Column, Grid, Row, TextInput } from 'carbon-components-svelte';
+import { onMount } from 'svelte';
+import { createWritableStore } from 'svelte-crossorigin-store/window';
 
-	const store = createWritableStore<string>("");
+const store = createWritableStore<string>('');
 
-	let text = $state("");
+let text = $state('');
 
-	const send = () => {
-		store.set(text);
-	};
+const send = () => {
+	store.set(text);
+};
 
-	onMount(() => {
-		const script = document.createElement("script");
-		script.src = "/third-party-window.js";
-		document.body.appendChild(script);
-		return () => script.remove();
-	});
+onMount(() => {
+	const script = document.createElement('script');
+	script.src = '/third-party-window.js';
+	document.body.appendChild(script);
+	return () => script.remove();
+});
 </script>
 
 <svelte:head>

@@ -1,5 +1,5 @@
-import { type Writable } from "svelte/store";
-import { createCrossOriginStore, type CoreOptions } from "./core.ts";
+import type { Writable } from 'svelte/store';
+import { type CoreOptions, createCrossOriginStore } from './core.ts';
 
 type IframeOptions<T> = CoreOptions<T> & {
 	iframeSelector?: string;
@@ -22,13 +22,11 @@ type IframeOptions<T> = CoreOptions<T> & {
  */
 export function createWritableStore<T>(
 	initialValue: T,
-	{ iframeSelector = "iframe", ...coreOptions }: IframeOptions<T> = {},
+	{ iframeSelector = 'iframe', ...coreOptions }: IframeOptions<T> = {},
 ): Writable<T> {
 	return createCrossOriginStore(initialValue, coreOptions, () => {
 		if (window.self === window.top) {
-			const iframes = document.querySelectorAll(
-				iframeSelector,
-			) as NodeListOf<HTMLIFrameElement>;
+			const iframes = document.querySelectorAll(iframeSelector) as NodeListOf<HTMLIFrameElement>;
 			return Array.from(iframes, (iframe) => iframe.contentWindow);
 		}
 

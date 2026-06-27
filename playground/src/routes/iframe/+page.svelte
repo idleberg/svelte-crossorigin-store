@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { Column, Grid, Row } from "carbon-components-svelte";
-	import { createWritableStore } from "svelte-crossorigin-store/iframe";
-	import Store from "$lib/Store.svelte";
+import { Column, Grid, Row } from 'carbon-components-svelte';
+import { createWritableStore } from 'svelte-crossorigin-store/iframe';
+import Store from '$lib/Store.svelte';
 
-	const store = createWritableStore<number>(1, {
-		onChange: (value) => {
-			localStorage.setItem("counter", String(value));
-		},
-	});
+const store = createWritableStore<number>(1, {
+	onChange: (value) => {
+		localStorage.setItem('counter', String(value));
+	},
+});
 </script>
 
 <svelte:head>

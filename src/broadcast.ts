@@ -1,4 +1,4 @@
-import { writable, type Invalidator, type Subscriber, type Writable } from 'svelte/store';
+import { type Invalidator, type Subscriber, type Writable, writable } from 'svelte/store';
 
 type MessageType = 'update' | 'request' | 'response';
 
@@ -28,10 +28,7 @@ type BroadcastOptions<T> = {
  */
 export function createWritableStore<T>(
 	initialValue: T,
-	{
-		channelName = 'svelte-crossorigin-store',
-		onChange = undefined,
-	}: BroadcastOptions<T> = {}
+	{ channelName = 'svelte-crossorigin-store', onChange = undefined }: BroadcastOptions<T> = {},
 ): Writable<T> {
 	const store = writable<T>(initialValue);
 	const { subscribe, set, update } = store;
@@ -60,13 +57,13 @@ export function createWritableStore<T>(
 		}
 	};
 
-	const enhancedSubscribe = (run: Subscriber<T>, invalidate: Invalidator<T> = () => { }) => {
+	const enhancedSubscribe = (run: Subscriber<T>, invalidate: Invalidator<T> = () => {}) => {
 		subscriberCount++;
 
 		if (subscriberCount === 1) {
 			channel.addEventListener('message', onMessage);
 
-			unsubscribeInternal = store.subscribe(value => {
+			unsubscribeInternal = store.subscribe((value) => {
 				currentValue = value;
 
 				if (!initialized) {
