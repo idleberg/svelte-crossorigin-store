@@ -1,11 +1,20 @@
 {
 	"extends": ["@idleberg/configs/biome"],
-	"files": {
-		"includes": [
-			"**",
-			// Generated files
-			"!packages/dent/src/grammar.js",
-			"!packages/dent/src/grammar.d.ts"
-		]
-	}
+	"overrides": [
+		{
+			"includes": ["**/*.svelte"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useConst": "off",
+						"useImportType": "off"
+					},
+					"correctness": {
+						"noUnusedVariables": "off",
+						"noUnusedImports": "off"
+					}
+				}
+			}
+		}
+	]
 }
