@@ -1,0 +1,19 @@
+{
+	"name": "playground",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^4",
+		"@sveltejs/kit": "^2",
+		"@sveltejs/vite-plugin-svelte": "^5",
+		"carbon-components-svelte": "^0.85.0",
+		"carbon-icons-svelte": "^12.6.0",
+		"svelte": "^5",
+		"typescript": "^5",
+		"vite": "^6",
+		"vite-plugin-mkcert": "^1.17.5"
+	}
+}

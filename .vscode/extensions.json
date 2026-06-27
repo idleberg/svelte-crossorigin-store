@@ -1,3 +1,7 @@
 {
-  "recommendations": ["svelte.svelte-vscode"]
+	"recommendations": [
+		"biomejs.biome",
+		"editorconfig.editorconfig",
+		"svelte.svelte-vscode"
+	]
 }
