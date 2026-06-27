@@ -1,0 +1,11 @@
+{
+	"extends": ["@idleberg/configs/biome"],
+	"files": {
+		"includes": [
+			"**",
+			// Generated files
+			"!packages/dent/src/grammar.js",
+			"!packages/dent/src/grammar.d.ts"
+		]
+	}
+}

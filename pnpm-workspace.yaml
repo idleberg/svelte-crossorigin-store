@@ -2,3 +2,9 @@ packages:
   - "playground"
 onlyBuiltDependencies:
   - esbuild
+
+publicHoistPattern:
+  - '*@biomejs/biome*'
+  - '*@e18e/cli*'
+  - '*@total-typescript/tsconfig*'
+  - '*lefthook*'

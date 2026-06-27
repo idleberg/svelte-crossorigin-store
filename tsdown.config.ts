@@ -1,4 +1,4 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from 'tsdown';
 
 export default defineConfig((options) => {
 	return {
@@ -13,6 +13,5 @@ export default defineConfig((options) => {
 		],
 		format: 'esm',
 		minify: !options.watch,
-		treeshake: 'recommended'
 	}
 });

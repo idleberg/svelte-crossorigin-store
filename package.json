@@ -2,6 +2,7 @@
 	"name": "svelte-crossorigin-store",
 	"version": "0.1.1",
 	"description": "Share your Svelte store across origins, including iFrames",
+	"license": "MIT",
 	"type": "module",
 	"exports": {
 		"./iframe": {
@@ -33,34 +34,41 @@
 		"iframe"
 	],
 	"engines": {
-		"node": ">=18.0.0"
+		"node": ">=20.0.0"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/idleberg/svelte-crossorigin-store"
+		"url": "git+https://github.com/idleberg/svelte-crossorigin-store.git"
 	},
 	"scripts": {
-		"build": "tsup",
+		"build": "tsdown",
 		"dev": "npm run build -- --watch",
-		"prepublishOnly": "npm run lint && npm run test",
-		"prepack": "npm run build",
+		"lint": "concurrently npm:lint:*",
+		"lint:biome": "biome check",
+		"lint:e18e": "e18e-cli analyze",
+		"prepublishOnly": "npm run build",
 		"start:iframe1": "cd playground && npx vite dev --strictPort --port 3031",
 		"start:iframe2": "cd playground && npx vite dev --strictPort --port 3032",
 		"start:main": "cd playground && npx vite dev --open --strictPort --port 3030",
-		"start": "npm-run-all --parallel start:*",
+		"start": "concurrently \"npm run start:iframe1\" \"npm run start:iframe2\" \"npm run start:main\"",
 		"test": "vitest run",
 		"test:e2e": "playwright test"
 	},
 	"devDependencies": {
+		"@commitlint/cli": "^21.0.2",
+		"@commitlint/config-conventional": "^21.0.2",
+		"@idleberg/configs": "^0.4.6",
 		"@playwright/test": "^1.61.1",
 		"@types/node": "^26.0.1",
-		"@vitest/browser": "^4.1.9",
 		"@vitest/browser-playwright": "^4.1.9",
-		"npm-run-all2": "^6.1.2",
+		"@vitest/browser": "^4.1.9",
+		"concurrently": "^10.0.3",
+		"lefthook": "^2.1.9",
+		"np": "^11.2.1",
 		"playwright": "^1.61.1",
 		"svelte": "^4.2.12",
+		"tsdown": "^0.22.3",
 		"tslib": "^2.6.2",
-		"tsup": "^8.0.2",
 		"typescript": "^5.2.2",
 		"vite": "^6.4.3",
 		"vitest": "^4.1.9"
