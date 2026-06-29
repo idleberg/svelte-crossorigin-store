@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>Playground | iFrame | {window.location.origin}</title>
+	<title>iFrame | svengen</title>
 </svelte:head>
 
 <Store {store} />

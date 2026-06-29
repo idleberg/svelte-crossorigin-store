@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>Playground | iFrame</title>
+	<title>iFrame | svengen</title>
 </svelte:head>
 
 <div class="mx-auto max-w-4xl p-6">

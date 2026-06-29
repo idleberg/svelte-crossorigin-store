@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-	<title>Playground | Popup | Child</title>
+	<title>Popup (Child) | svengen</title>
 </svelte:head>
 
 <Store {store} label="Popup" />
