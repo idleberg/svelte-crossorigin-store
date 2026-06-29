@@ -1,6 +1,6 @@
 # svengen
 
-> Share your Svelte store across origins, including iFrames.
+> Share your Svelte store across boundaries, including iFrames, browser tabs, and popups.
 
 [![License](https://img.shields.io/github/license/idleberg/svengen?color=blue&style=for-the-badge)](https://github.com/idleberg/svengen/blob/main/LICENSE)
 [![Version](https://img.shields.io/npm/v/svengen?style=for-the-badge)](https://www.npmjs.org/package/svengen)
