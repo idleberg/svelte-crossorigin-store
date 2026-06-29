@@ -1,5 +1,4 @@
 <script lang="ts">
-import { Column, Grid, Row } from 'carbon-components-svelte';
 import { createWritableStore } from 'svelte-crossorigin-store/iframe';
 import Store from '$lib/Store.svelte';
 
@@ -14,37 +13,12 @@ const store = createWritableStore<number>(1, {
 	<title>Playground | iFrame</title>
 </svelte:head>
 
-<Grid fullWidth>
-	<Row>
-		<Column padding>
-			<h1>iFrame Playground</h1>
-			<p>Change the counter in any of these origins to see the state being synced.</p>
-		</Column>
-	</Row>
+<div class="mx-auto max-w-4xl p-6">
+	<h1 class="mb-4 text-2xl font-bold">iFrame Playground</h1>
+	<p class="mb-6">Change the counter in any of these origins to see the state being synced.</p>
 
-	<Row>
-		<Column padding>
-			<Store {store} />
-		</Column>
-	</Row>
+	<Store {store} />
 
-	<Row>
-		<Column padding>
-			<iframe src="https://localhost:3031/iframe/frame" title="iFrame #1"></iframe>
-		</Column>
-	</Row>
-
-	<Row>
-		<Column padding>
-			<iframe src="https://localhost:3032/iframe/frame" title="iFrame #2"></iframe>
-		</Column>
-	</Row>
-</Grid>
-
-<style>
-	iframe {
-		width: 100%;
-		height: 150px;
-		border: 0;
-	}
-</style>
+	<iframe class="mt-6 w-full h-[150px] border-0" src="https://localhost:3031/iframe/frame" title="iFrame #1"></iframe>
+	<iframe class="mt-6 w-full h-[150px] border-0" src="https://localhost:3032/iframe/frame" title="iFrame #2"></iframe>
+</div>
