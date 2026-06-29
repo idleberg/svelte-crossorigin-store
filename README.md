@@ -7,7 +7,7 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/idleberg/svelte-crossorigin-store/test.yml?style=for-the-badge)](https://github.com/idleberg/svelte-crossorigin-store/actions)
 
 > [!IMPORTANT]
-> Future version of this package will be published as [svengen](https://www.npmjs.org/package/svengen).
+> Since the scope of this package has changed beyond cross-origin, future version of this package will be published under the new name [svengen](https://www.npmjs.org/package/svengen).
 
 **Features**
 
