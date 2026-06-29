@@ -1,6 +1,6 @@
 {
 	"name": "svengen",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Share your Svelte store across boundaries, including iFrames, browser tabs, and popups.",
 	"license": "MIT",
 	"type": "module",
