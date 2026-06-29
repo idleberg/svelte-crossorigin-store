@@ -1,0 +1,16 @@
+packages:
+  - "playground"
+
+onlyBuiltDependencies:
+  - esbuild
+
+publicHoistPattern:
+  - "*@biomejs/biome*"
+  - "*@e18e/cli*"
+  - "*@total-typescript/tsconfig*"
+  - "*lefthook*"
+
+catalog:
+  svelte: ^5.56.4
+  typescript: ^6.0.3
+  vite: ^8.1.0
