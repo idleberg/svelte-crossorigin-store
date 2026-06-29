@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import { createWritableStore } from "svelte-crossorigin-store/window";
+	import { createWritableStore } from "svengen/window";
 
 	const store = createWritableStore<string>("");
 

@@ -1,7 +1,7 @@
 {
-	"name": "svelte-crossorigin-store",
-	"version": "0.2.0",
-	"description": "Share your Svelte store across origins, including iFrames",
+	"name": "svengen",
+	"version": "0.1.0",
+	"description": "Share your Svelte store across boundaries, including iFrames, browser tabs, and popups.",
 	"license": "MIT",
 	"type": "module",
 	"exports": {
@@ -38,7 +38,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/idleberg/svelte-crossorigin-store.git"
+		"url": "git+https://github.com/idleberg/svengen.git"
 	},
 	"scripts": {
 		"build": "tsdown",

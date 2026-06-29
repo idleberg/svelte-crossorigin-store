@@ -6,7 +6,7 @@
 		"dev": "vite dev"
 	},
 	"dependencies": {
-		"svelte-crossorigin-store": "workspace:*"
+		"svengen": "workspace:*"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^7.0.1",

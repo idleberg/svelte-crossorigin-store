@@ -24,7 +24,7 @@ type MessageData<T> = {
  */
 export function createCrossOriginStore<T>(
 	initialValue: T,
-	{ allowedOrigins = ['*'], id = 'svelte-crossorigin-store:message', onChange = undefined }: CoreOptions<T>,
+	{ allowedOrigins = ['*'], id = 'svengen:message', onChange = undefined }: CoreOptions<T>,
 	getTargets: () => (Window | null)[],
 ): Writable<T> {
 	const store = writable<T>(initialValue);
