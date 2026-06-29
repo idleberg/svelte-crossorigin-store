@@ -1,10 +1,13 @@
 # svengen
 
-> Share your Svelte store across origins, including iFrames.
+> Share your Svelte store across boundaries, including iFrames, browser tabs, and popups.
 
 [![License](https://img.shields.io/github/license/idleberg/svengen?color=blue&style=for-the-badge)](https://github.com/idleberg/svengen/blob/main/LICENSE)
 [![Version](https://img.shields.io/npm/v/svengen?style=for-the-badge)](https://www.npmjs.org/package/svengen)
 [![Build](https://img.shields.io/github/actions/workflow/status/idleberg/svengen/test.yml?style=for-the-badge)](https://github.com/idleberg/svengen/actions)
+
+> [!TIP]
+> In the European Union, the Schengen agreement enables the free movement of people and goods across borders — this package does the same for your Svelte stores."
 
 **Features**
 
