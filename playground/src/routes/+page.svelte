@@ -7,23 +7,23 @@
 	<p class="mb-2">Select a playground:</p>
 	<ul class="list-disc pl-6">
 		<li>
-			<a class="text-violet-600 underline hover:text-violet-800" href="/iframe"
+			<a class="text-indigo-600 underline hover:text-indigo-800" href="/iframe"
 				>iFrame</a
 			>
 		</li>
 		<li>
-			<a class="text-violet-600 underline hover:text-violet-800" href="/window"
+			<a class="text-indigo-600 underline hover:text-indigo-800" href="/window"
 				>Window</a
 			>
 		</li>
 		<li>
 			<a
-				class="text-violet-600 underline hover:text-violet-800"
+				class="text-indigo-600 underline hover:text-indigo-800"
 				href="/broadcast">Broadcast</a
 			>
 		</li>
 		<li>
-			<a class="text-violet-600 underline hover:text-violet-800" href="/popup"
+			<a class="text-indigo-600 underline hover:text-indigo-800" href="/popup"
 				>Popup</a
 			>
 		</li>
