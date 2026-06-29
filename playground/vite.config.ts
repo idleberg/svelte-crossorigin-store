@@ -1,10 +1,11 @@
 import { resolve } from 'node:path';
 import { sveltekit } from '@sveltejs/kit/vite';
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 import mkcert from 'vite-plugin-mkcert';
 
 export default defineConfig({
-	plugins: [mkcert(), sveltekit()],
+	plugins: [mkcert(), tailwindcss(), sveltekit()],
 	resolve: {
 		alias: {
 			'svelte-crossorigin-store/iframe': resolve(__dirname, '../src/iframe.ts'),

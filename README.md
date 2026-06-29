@@ -6,6 +6,9 @@
 [![Version](https://img.shields.io/npm/v/svelte-crossorigin-store?style=for-the-badge)](https://www.npmjs.org/package/svelte-crossorigin-store)
 [![Build](https://img.shields.io/github/actions/workflow/status/idleberg/svelte-crossorigin-store/test.yml?style=for-the-badge)](https://github.com/idleberg/svelte-crossorigin-store/actions)
 
+> [!IMPORTANT]
+> Since the scope of this package has changed beyond cross-origin, future version of this package will be published under the new name [svengen](https://www.npmjs.org/package/svengen).
+
 **Features**
 
 - made for Svelte, works anywhere
@@ -22,12 +25,12 @@
 
 The library provides four entrypoints, each targeting a different communication mechanism:
 
-| Entrypoint | Use Case | API |
-|---|---|---|
-| `svelte-crossorigin-store/iframe` | Parent page ↔ iFrames (cross-origin) | `postMessage` |
-| `svelte-crossorigin-store/popup` | Parent page ↔ popup windows | `postMessage` |
-| `svelte-crossorigin-store/window` | Same-page scripts (e.g. first-party ↔ third-party) | `postMessage` |
-| `svelte-crossorigin-store/broadcast` | Same-origin tabs | `BroadcastChannel` |
+| Entrypoint                           | Use Case                                           | API                |
+| ------------------------------------ | -------------------------------------------------- | ------------------ |
+| `svelte-crossorigin-store/iframe`    | Parent page ↔ iFrames (cross-origin)               | `postMessage`      |
+| `svelte-crossorigin-store/popup`     | Parent page ↔ popup windows                        | `postMessage`      |
+| `svelte-crossorigin-store/window`    | Same-page scripts (e.g. first-party ↔ third-party) | `postMessage`      |
+| `svelte-crossorigin-store/broadcast` | Same-origin tabs                                   | `BroadcastChannel` |
 
 The iframe, window, and broadcast entrypoints export `createWritableStore`, which returns a standard Svelte `Writable` store. The popup entrypoint exports both `createPopupStore` (for the parent) and `createWritableStore` (for the popup child).
 
@@ -81,10 +84,10 @@ Synchronizes state between a parent page and popup windows opened via `window.op
 **Popup page:**
 
 ```ts
-import { createWritableStore } from 'svelte-crossorigin-store/popup';
+import { createWritableStore } from "svelte-crossorigin-store/popup";
 
 const store = createWritableStore(0, {
-  allowedOrigins: ['https://example.com'],
+	allowedOrigins: ["https://example.com"],
 });
 ```
 
@@ -110,10 +113,10 @@ createPopupStore<T>(initialValue: T, {
 Synchronizes state between scripts on the same page via `postMessage` to `window`. Useful for communicating between a first-party Svelte app and third-party scripts.
 
 ```ts
-import { createWritableStore } from 'svelte-crossorigin-store/window';
+import { createWritableStore } from "svelte-crossorigin-store/window";
 
 const store = createWritableStore(0, {
-  allowedOrigins: ['https://example.com'],
+	allowedOrigins: ["https://example.com"],
 });
 ```
 
@@ -132,10 +135,10 @@ createWritableStore<T>(initialValue: T, {
 Synchronizes state across browser tabs on the same origin using the `BroadcastChannel` API.
 
 ```ts
-import { createWritableStore } from 'svelte-crossorigin-store/broadcast';
+import { createWritableStore } from "svelte-crossorigin-store/broadcast";
 
 const store = createWritableStore(0, {
-  channelName: 'my-counter',
+	channelName: "my-counter",
 });
 ```
 

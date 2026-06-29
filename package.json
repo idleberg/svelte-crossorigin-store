@@ -1,6 +1,6 @@
 {
 	"name": "svelte-crossorigin-store",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"description": "Share your Svelte store across origins, including iFrames",
 	"license": "MIT",
 	"type": "module",
@@ -47,9 +47,9 @@
 		"lint:biome": "biome check",
 		"lint:e18e": "e18e-cli analyze --log-level error",
 		"prepublishOnly": "npm run build",
-		"start:iframe1": "cd playground && npx vite dev --strictPort --port 3031",
-		"start:iframe2": "cd playground && npx vite dev --strictPort --port 3032",
-		"start:main": "cd playground && npx vite dev --open --strictPort --port 3030",
+		"start:iframe1": "pnpm --filter playground exec vite dev --strictPort --port 3031",
+		"start:iframe2": "pnpm --filter playground exec vite dev --strictPort --port 3032",
+		"start:main": "pnpm --filter playground exec vite dev --open --strictPort --port 3030",
 		"start": "concurrently \"npm run start:iframe1\" \"npm run start:iframe2\" \"npm run start:main\"",
 		"test": "vitest run",
 		"test:e2e": "playwright test"
@@ -66,11 +66,11 @@
 		"lefthook": "^2.1.9",
 		"np": "^11.2.1",
 		"playwright": "^1.61.1",
-		"svelte": "^5.56.4",
+		"svelte": "catalog:",
 		"tsdown": "^0.22.3",
 		"tslib": "^2.8.1",
-		"typescript": "^6.0.3",
-		"vite": "^8.1.0",
+		"typescript": "catalog:",
+		"vite": "catalog:",
 		"vitest": "^4.1.9"
 	},
 	"peerDependencies": {

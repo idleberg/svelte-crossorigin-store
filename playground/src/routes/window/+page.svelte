@@ -1,53 +1,46 @@
 <script lang="ts">
-import { Button, Column, Grid, Row, TextInput } from 'carbon-components-svelte';
-import { onMount } from 'svelte';
-import { createWritableStore } from 'svelte-crossorigin-store/window';
+	import { onMount } from "svelte";
+	import { createWritableStore } from "svelte-crossorigin-store/window";
 
-const store = createWritableStore<string>('');
+	const store = createWritableStore<string>("");
 
-let text = $state('');
+	let text = $state("");
 
-const send = () => {
-	store.set(text);
-};
+	const send = () => {
+		store.set(text);
+	};
 
-onMount(() => {
-	const script = document.createElement('script');
-	script.src = '/third-party-window.js';
-	document.body.appendChild(script);
-	return () => script.remove();
-});
+	onMount(() => {
+		const script = document.createElement("script");
+		script.src = "/third-party-window.js";
+		document.body.appendChild(script);
+		return () => script.remove();
+	});
 </script>
 
 <svelte:head>
 	<title>Playground | Window</title>
 </svelte:head>
 
-<Grid fullWidth>
-	<Row>
-		<Column padding>
-			<h1>Window Playground</h1>
-			<p>
-				Type a message and click Send. A third-party script on this page
-				listens for <code>postMessage</code> events and shows an alert with the value.
-			</p>
-			<p>Store value: <strong>{$store || "(empty)"}</strong></p>
-		</Column>
-	</Row>
+<div class="mx-auto max-w-4xl p-6">
+	<h1 class="mb-4 text-2xl font-bold">Window Playground</h1>
+	<p class="mb-2">
+		Type a message and click Send. A third-party script on this page listens for <code
+			class="rounded bg-gray-100 px-1">postMessage</code
+		> events and shows an alert with the value.
+	</p>
+	<p class="mb-6">Store value: <strong>{$store || "(empty)"}</strong></p>
 
-	<Row>
-		<Column padding>
-			<TextInput
-				labelText="Message"
-				placeholder="Type a message…"
-				bind:value={text}
-			/>
-		</Column>
-	</Row>
-
-	<Row>
-		<Column padding>
-			<Button on:click={send}>Send</Button>
-		</Column>
-	</Row>
-</Grid>
+	<div class="flex gap-2">
+		<input
+			class="flex-1 rounded border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+			type="text"
+			placeholder="Type a message…"
+			bind:value={text}
+		/>
+		<button
+			class="rounded bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700"
+			onclick={send}>Send</button
+		>
+	</div>
+</div>

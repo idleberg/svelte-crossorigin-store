@@ -1,37 +1,36 @@
 <script lang="ts">
-import { Button, ButtonSet, Tag } from 'carbon-components-svelte';
-import Add from 'carbon-icons-svelte/lib/Add.svelte';
-import Reset from 'carbon-icons-svelte/lib/Reset.svelte';
-import Subtract from 'carbon-icons-svelte/lib/Subtract.svelte';
-import type { Writable } from 'svelte/store';
+	import type { Writable } from "svelte/store";
 
-let { store, label }: { store: Writable<number>; label?: string } = $props();
+	let { store, label }: { store: Writable<number>; label?: string } = $props();
 
-const clickHandler = (value: null | number = 0) => {
-	store.update((counter) => (value === null ? 0 : counter + value));
-};
+	const clickHandler = (value: null | number = 0) => {
+		store.update((counter) => (value === null ? 0 : counter + value));
+	};
 </script>
 
-<section>
-	<h2>
+<section class="h-[150px]">
+	<h2 class="my-4 flex items-center gap-2 text-lg font-semibold">
 		{label ?? (window.self === window.top ? "Parent" : "iFrame")}
-		<Tag type="outline">{window.location.host}</Tag>
-		<Tag type="high-contrast">Current Value: {$store}</Tag>
+		<span class="rounded border px-2 py-0.5 text-xs"
+			>{window.location.host}</span
+		>
+		<span class="rounded bg-gray-800 px-2 py-0.5 text-xs text-white"
+			>Current Value: {$store}</span
+		>
 	</h2>
 
-	<ButtonSet>
-		<Button icon={Add} on:click={() => clickHandler(1)}>Add</Button>
-		<Button icon={Subtract} on:click={() => clickHandler(-1)}>Subtract</Button>
-		<Button icon={Reset} kind="secondary" on:click={() => clickHandler(null)}>reset</Button>
-	</ButtonSet>
+	<div class="flex gap-2">
+		<button
+			class="rounded bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700"
+			onclick={() => clickHandler(1)}>+ Add</button
+		>
+		<button
+			class="rounded bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700"
+			onclick={() => clickHandler(-1)}>- Subtract</button
+		>
+		<button
+			class="rounded border border-blue-600 px-4 py-2 text-sm text-indigo-600 hover:bg-indigo-50"
+			onclick={() => clickHandler(null)}>Reset</button
+		>
+	</div>
 </section>
-
-<style>
-	h2 {
-		margin: 1rem 0;
-	}
-
-	section {
-		height: 150px;
-	}
-</style>
