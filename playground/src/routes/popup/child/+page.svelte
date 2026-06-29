@@ -1,10 +1,10 @@
 <script lang="ts">
-import { createWritableStore } from 'svelte-crossorigin-store/popup';
-import Store from '$lib/Store.svelte';
+	import { createWritableStore } from "svengen/popup";
+	import Store from "$lib/Store.svelte";
 
-const store = createWritableStore<number>(0, {
-	allowedOrigins: ['*'],
-});
+	const store = createWritableStore<number>(0, {
+		allowedOrigins: ["*"],
+	});
 </script>
 
 <svelte:head>

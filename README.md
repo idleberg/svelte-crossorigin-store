@@ -1,10 +1,10 @@
-# svelte-crossorigin-store
+# svengen
 
 > Share your Svelte store across origins, including iFrames.
 
-[![License](https://img.shields.io/github/license/idleberg/svelte-crossorigin-store?color=blue&style=for-the-badge)](https://github.com/idleberg/svelte-crossorigin-store/blob/main/LICENSE)
-[![Version](https://img.shields.io/npm/v/svelte-crossorigin-store?style=for-the-badge)](https://www.npmjs.org/package/svelte-crossorigin-store)
-[![Build](https://img.shields.io/github/actions/workflow/status/idleberg/svelte-crossorigin-store/test.yml?style=for-the-badge)](https://github.com/idleberg/svelte-crossorigin-store/actions)
+[![License](https://img.shields.io/github/license/idleberg/svengen?color=blue&style=for-the-badge)](https://github.com/idleberg/svengen/blob/main/LICENSE)
+[![Version](https://img.shields.io/npm/v/svengen?style=for-the-badge)](https://www.npmjs.org/package/svengen)
+[![Build](https://img.shields.io/github/actions/workflow/status/idleberg/svengen/test.yml?style=for-the-badge)](https://github.com/idleberg/svengen/actions)
 
 > [!IMPORTANT]
 > Since the scope of this package has changed beyond cross-origin, future version of this package will be published under the new name [svengen](https://www.npmjs.org/package/svengen).
@@ -19,18 +19,18 @@
 
 ## Installation
 
-`npm install svelte-crossorigin-store`
+`npm install svengen`
 
 ## Usage
 
 The library provides four entrypoints, each targeting a different communication mechanism:
 
-| Entrypoint                           | Use Case                                           | API                |
-| ------------------------------------ | -------------------------------------------------- | ------------------ |
-| `svelte-crossorigin-store/iframe`    | Parent page ↔ iFrames (cross-origin)               | `postMessage`      |
-| `svelte-crossorigin-store/popup`     | Parent page ↔ popup windows                        | `postMessage`      |
-| `svelte-crossorigin-store/window`    | Same-page scripts (e.g. first-party ↔ third-party) | `postMessage`      |
-| `svelte-crossorigin-store/broadcast` | Same-origin tabs                                   | `BroadcastChannel` |
+| Entrypoint          | Use Case                                           | API                |
+| ------------------- | -------------------------------------------------- | ------------------ |
+| `svengen/iframe`    | Parent page ↔ iFrames (cross-origin)               | `postMessage`      |
+| `svengen/popup`     | Parent page ↔ popup windows                        | `postMessage`      |
+| `svengen/window`    | Same-page scripts (e.g. first-party ↔ third-party) | `postMessage`      |
+| `svengen/broadcast` | Same-origin tabs                                   | `BroadcastChannel` |
 
 The iframe, window, and broadcast entrypoints export `createWritableStore`, which returns a standard Svelte `Writable` store. The popup entrypoint exports both `createPopupStore` (for the parent) and `createWritableStore` (for the popup child).
 
@@ -40,7 +40,7 @@ Synchronizes state between a parent page and its iFrames. The parent automatical
 
 ```svelte
 <script>
-  import { createWritableStore } from 'svelte-crossorigin-store/iframe';
+  import { createWritableStore } from 'svengen/iframe';
 
   const counter = createWritableStore(0, {
     allowedOrigins: ['https://example.com'],
@@ -55,7 +55,7 @@ Synchronizes state between a parent page and its iFrames. The parent automatical
 ```ts
 createWritableStore<T>(initialValue: T, {
   allowedOrigins?: string[];   // Origins to accept messages from (default: ['*'])
-  id?: string;                 // Message channel identifier (default: 'svelte-crossorigin-store:message')
+  id?: string;                 // Message channel identifier (default: 'svengen:message')
   iframeSelector?: string;     // CSS selector for target iFrames (default: 'iframe')
   onChange?: (value: T) => void;
 });
@@ -69,7 +69,7 @@ Synchronizes state between a parent page and popup windows opened via `window.op
 
 ```svelte
 <script>
-  import { createPopupStore } from 'svelte-crossorigin-store/popup';
+  import { createPopupStore } from 'svengen/popup';
 
   const { store, open } = createPopupStore(0, {
     url: '/popup-page',
@@ -84,7 +84,7 @@ Synchronizes state between a parent page and popup windows opened via `window.op
 **Popup page:**
 
 ```ts
-import { createWritableStore } from "svelte-crossorigin-store/popup";
+import { createWritableStore } from "svengen/popup";
 
 const store = createWritableStore(0, {
 	allowedOrigins: ["https://example.com"],
@@ -100,7 +100,7 @@ createPopupStore<T>(initialValue: T, {
   url: string;                 // URL to open in the popup (required)
   features?: string;           // window.open() features string (e.g. 'width=400,height=300')
   allowedOrigins?: string[];   // Origins to accept messages from (default: ['*'])
-  id?: string;                 // Message channel identifier (default: 'svelte-crossorigin-store:message')
+  id?: string;                 // Message channel identifier (default: 'svengen:message')
   onChange?: (value: T) => void;
 });
 // Returns: { store: Writable<T>, open: () => Window | null }
@@ -113,7 +113,7 @@ createPopupStore<T>(initialValue: T, {
 Synchronizes state between scripts on the same page via `postMessage` to `window`. Useful for communicating between a first-party Svelte app and third-party scripts.
 
 ```ts
-import { createWritableStore } from "svelte-crossorigin-store/window";
+import { createWritableStore } from "svengen/window";
 
 const store = createWritableStore(0, {
 	allowedOrigins: ["https://example.com"],
@@ -125,7 +125,7 @@ const store = createWritableStore(0, {
 ```ts
 createWritableStore<T>(initialValue: T, {
   allowedOrigins?: string[];   // Origins to accept messages from (default: ['*'])
-  id?: string;                 // Message channel identifier (default: 'svelte-crossorigin-store:message')
+  id?: string;                 // Message channel identifier (default: 'svengen:message')
   onChange?: (value: T) => void;
 });
 ```
@@ -135,7 +135,7 @@ createWritableStore<T>(initialValue: T, {
 Synchronizes state across browser tabs on the same origin using the `BroadcastChannel` API.
 
 ```ts
-import { createWritableStore } from "svelte-crossorigin-store/broadcast";
+import { createWritableStore } from "svengen/broadcast";
 
 const store = createWritableStore(0, {
 	channelName: "my-counter",
@@ -146,7 +146,7 @@ const store = createWritableStore(0, {
 
 ```ts
 createWritableStore<T>(initialValue: T, {
-  channelName?: string;        // BroadcastChannel name (default: 'svelte-crossorigin-store')
+  channelName?: string;        // BroadcastChannel name (default: 'svengen')
   onChange?: (value: T) => void;
 });
 ```

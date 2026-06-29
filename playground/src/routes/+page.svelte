@@ -1,9 +1,9 @@
 <svelte:head>
-	<title>Playground | svelte-crossorigin-store</title>
+	<title>Playground | svengen</title>
 </svelte:head>
 
 <div class="mx-auto max-w-4xl p-6">
-	<h1 class="mb-4 text-2xl font-bold">svelte-crossorigin-store</h1>
+	<h1 class="mb-4 text-2xl font-bold">svengen</h1>
 	<p class="mb-2">Select a playground:</p>
 	<ul class="list-disc pl-6">
 		<li>

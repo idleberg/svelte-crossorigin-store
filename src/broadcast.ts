@@ -28,7 +28,7 @@ type BroadcastOptions<T> = {
  */
 export function createWritableStore<T>(
 	initialValue: T,
-	{ channelName = 'svelte-crossorigin-store', onChange = undefined }: BroadcastOptions<T> = {},
+	{ channelName = 'svengen', onChange = undefined }: BroadcastOptions<T> = {},
 ): Writable<T> {
 	const store = writable<T>(initialValue);
 	const { subscribe, set, update } = store;

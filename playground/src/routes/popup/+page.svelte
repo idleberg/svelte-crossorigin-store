@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createPopupStore } from "svelte-crossorigin-store/popup";
+	import { createPopupStore } from "svengen/popup";
 	import Store from "$lib/Store.svelte";
 
 	const { store, open } = createPopupStore<number>(0, {
