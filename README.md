@@ -6,7 +6,7 @@
 [![Version](https://img.shields.io/npm/v/svengen?style=for-the-badge)](https://www.npmjs.org/package/svengen)
 [![Build](https://img.shields.io/github/actions/workflow/status/idleberg/svengen/test.yml?style=for-the-badge)](https://github.com/idleberg/svengen/actions)
 
-> [!TIP]
+> [!NOTE]
 > In the European Union, the Schengen agreement enables the free movement of people and goods across borders — this package does the same for your Svelte stores."
 
 **Features**
