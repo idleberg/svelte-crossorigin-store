@@ -22,13 +22,15 @@
 	<Store {store} />
 
 	<iframe
-		class="mt-6 w-full h-[150px] border-0"
+		class="mt-6 w-full h-[150px] border-0 overflow-hidden"
 		src="https://localhost:3031/iframe/frame"
 		title="iFrame #1"
+		scrolling="no"
 	></iframe>
 	<iframe
-		class="mt-6 w-full h-[150px] border-0"
+		class="mt-6 w-full h-[150px] border-0 overflow-hidden"
 		src="https://localhost:3032/iframe/frame"
 		title="iFrame #2"
+		scrolling="no"
 	></iframe>
 </div>
